@@ -4,6 +4,7 @@
     <Name>UniAppBackend</Name>
     <RootNamespace>UniAppBackend</RootNamespace>
     <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <TestFramework>Pytest</TestFramework>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -30,6 +31,19 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="collegeapp\admin.py" />
+    <Compile Include="collegeapp\apps.py" />
+    <Compile Include="collegeapp\migrations\__init__.py" />
+    <Compile Include="collegeapp\models.py" />
+    <Compile Include="collegeapp\serializers.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="collegeapp\tests.py" />
+    <Compile Include="collegeapp\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="collegeapp\views.py" />
+    <Compile Include="collegeapp\__init__.py" />
     <Compile Include="manage.py" />
     <Compile Include="UniAppBackend\__init__.py" />
     <Compile Include="UniAppBackend\settings.py" />
@@ -37,9 +51,13 @@
     <Compile Include="UniAppBackend\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="requirements.txt" />
+    <Content Include="collegeapp\templates\collegeapp\index.html" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="collegeapp\" />
+    <Folder Include="collegeapp\migrations\" />
+    <Folder Include="collegeapp\templates\" />
+    <Folder Include="collegeapp\templates\collegeapp\" />
     <Folder Include="UniAppBackend\" />
   </ItemGroup>
   <ItemGroup>
