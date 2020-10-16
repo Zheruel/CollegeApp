@@ -37,8 +37,8 @@ class StudentApplication(models.Model):
     highSchoolName = models.CharField(max_length = 100)
     coverLetter = models.CharField(max_length = 100)
     highSchoolDocument = models.FileField(upload_to="uploads/")
-    highSchoolGPA = models.DecimalField(max_digits = 5, decimal_places=2)
-    maturaGrade = models.DecimalField(max_digits = 5, decimal_places=2)
+    highSchoolGPA = models.DecimalField(max_digits = 3, decimal_places=2)
+    maturaGrade = models.DecimalField(max_digits = 3, decimal_places=2)
     student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True)
     major = models.ForeignKey(Major, on_delete=models.CASCADE, null=True)
 
