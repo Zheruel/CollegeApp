@@ -33,6 +33,9 @@
   <ItemGroup>
     <Compile Include="collegeapp\admin.py" />
     <Compile Include="collegeapp\apps.py" />
+    <Compile Include="collegeapp\jwtmanager.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="collegeapp\migrations\__init__.py" />
     <Compile Include="collegeapp\models.py" />
     <Compile Include="collegeapp\serializers.py">

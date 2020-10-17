@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import College, Major, Subject, Student, StudentApplication, Administrator
+from django.contrib.auth.hashers import make_password
 
 
 class CollegeSerializer(serializers.HyperlinkedModelSerializer):
@@ -18,6 +19,11 @@ class SubjectSerializer(serializers.HyperlinkedModelSerializer):
         fields = ("id", "name", "major")
 
 class StudentSerializer(serializers.HyperlinkedModelSerializer):
+    def create(self, validated_data):
+        validated_data["password"] = make_password(validated_data["password"])
+
+        return Student.objects.create(**validated_data)
+
     class Meta:
         model = Student
         fields = ("id", "firstName", "lastName", "email", "password")
@@ -31,3 +37,11 @@ class AdministratorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Administrator
         fields = ("id", "email", "password")
+
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField(required = True)
+    password = serializers.CharField(required = True)
+    isAdmin = serializers.BooleanField(required = True)
+
+    def create(self, validated_data):
+        return validated_data
