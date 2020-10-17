@@ -34,6 +34,11 @@ class StudentApplicationSerializer(serializers.HyperlinkedModelSerializer):
         fields = ("id", "birthDate", "birthPlace", "highSchoolName", "coverLetter", "highSchoolDocument", "highSchoolGPA", "maturaGrade", "student", "major")
 
 class AdministratorSerializer(serializers.HyperlinkedModelSerializer):
+    def create(self, validated_data):
+        validated_data["password"] = make_password(validated_data["password"])
+
+        return Administrator.objects.create(**validated_data)
+
     class Meta:
         model = Administrator
         fields = ("id", "email", "password")
@@ -41,7 +46,12 @@ class AdministratorSerializer(serializers.HyperlinkedModelSerializer):
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField(required = True)
     password = serializers.CharField(required = True)
-    isAdmin = serializers.BooleanField(required = True)
+
+    def create(self, validated_data):
+        return validated_data
+
+class TokenSerializer(serializers.Serializer):
+    token = serializers.CharField(required = True)
 
     def create(self, validated_data):
         return validated_data

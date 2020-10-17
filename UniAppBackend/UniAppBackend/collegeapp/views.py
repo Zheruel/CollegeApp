@@ -6,6 +6,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from . import jwtmanager
+import django.core.exceptions
+from django.contrib.auth.hashers import make_password, check_password
 
 class CollegeViewSet(viewsets.ModelViewSet):
     queryset = College.objects.all().order_by("name")
@@ -36,10 +38,57 @@ class AppLogin(APIView):
         serializer = LoginSerializer(data = request.data)
 
         if serializer.is_valid():
-            encoded_jwt = jwtmanager.getToken(serializer.data, "user")
-            test = jwtmanager.verifyToken(encoded_jwt)
-            encoded_jwt2 = jwtmanager.refreshToken(encoded_jwt)
+            try:
+                adminObject = Administrator.objects.get(email=serializer.data["email"])
 
-            return Response(encoded_jwt2, status = status.HTTP_200_OK)
+                if check_password(serializer.data["password"], adminObject.password):
+                    encoded_jwt = jwtmanager.getToken(serializer.data, "administrator")
 
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+                    return Response(encoded_jwt, status = status.HTTP_200_OK)
+
+                else:
+                    return Response("Failed login", status = status.HTTP_400_BAD_REQUEST)
+
+            except django.core.exceptions.ObjectDoesNotExist:
+                try:
+                    studentObject = Student.objects.get(email=serializer.data["email"])
+
+                    if check_password(serializer.data["password"], studentObject.password):
+                        encoded_jwt = jwtmanager.getToken(serializer.data, "student")
+
+                        return Response(encoded_jwt, status = status.HTTP_200_OK)
+
+                    else:
+                        return Response("Failed login", status = status.HTTP_400_BAD_REQUEST)
+
+                except django.core.exceptions.ObjectDoesNotExist:
+                    return Response("Login failed", status = status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+class TokenRefresh(APIView):
+    def post(self, request, format=None):
+        serializer = TokenSerializer(data = request.data)
+
+        if serializer.is_valid():
+            if(jwtmanager.verifyToken(serializer.data["token"])):
+                encoded_jwt = jwtmanager.refreshToken(serializer.data["token"])
+
+                return Response(encoded_jwt, status = status.HTTP_200_OK)
+           
+            else:
+                return Response("Token is not valid", status = status.HTTP_400_BAD_REQUEST)
+
+        else:
+            return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+class TokenValidate(APIView):
+    def post(self, request, format=None):
+        serializer = TokenSerializer(data = request.data)
+
+        if serializer.is_valid():
+            if(jwtmanager.verifyToken(serializer.data["token"])):
+                return Response("Token is valid", status = status.HTTP_200_OK)
+
+            else:
+                return Response("Token is invalid", status = status.HTTP_400_BAD_REQUEST)
