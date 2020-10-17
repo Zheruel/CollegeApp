@@ -9,6 +9,6 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(user: UserLogin){
-    return this.http.post<UserLogin>("http://localhost:5000/login", user)
+    return this.http.post<string>("http://localhost:5000/login", user)
   }
 }

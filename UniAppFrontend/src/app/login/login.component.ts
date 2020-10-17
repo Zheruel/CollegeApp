@@ -25,10 +25,11 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(loginInfo).subscribe({
       next: data => {
-          console.log(data);
+        sessionStorage.setItem("token", data)
+        console.log(sessionStorage.getItem("token"));
       },
       error: error => {
-          console.log(error);
+        console.log(error);
       }
     });
   }
