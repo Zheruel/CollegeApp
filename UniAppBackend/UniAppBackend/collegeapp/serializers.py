@@ -20,6 +20,7 @@ class SubjectSerializer(serializers.HyperlinkedModelSerializer):
 
 class StudentSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
+        validated_data["email"] = validated_data["email"].lower()
         validated_data["password"] = make_password(validated_data["password"])
 
         return Student.objects.create(**validated_data)

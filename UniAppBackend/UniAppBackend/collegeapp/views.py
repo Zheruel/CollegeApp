@@ -25,6 +25,16 @@ class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all().order_by("firstName")
     serializer_class = StudentSerializer
 
+    def create(self, request):
+        serializer = StudentSerializer(data = request.data)
+
+        if serializer.is_valid():
+            if Student.objects.filter(email = serializer.data["email"].lower()).exists():
+                return Response("Email is already taken", status = status.HTTP_400_BAD_REQUEST)
+
+            else:
+                return super().create(request)
+
 class StudentApplicationViewSet(viewsets.ModelViewSet):
     queryset = StudentApplication.objects.all().order_by("id")
     serializer_class = StudentApplicationSerializer
