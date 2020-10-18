@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import College, Major, Subject, Student, StudentApplication, Administrator
+from .models import *
 
 
 admin.site.register(College)

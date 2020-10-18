@@ -34,6 +34,8 @@ class StudentViewSet(viewsets.ModelViewSet):
 
             else:
                 return super().create(request)
+        else:
+            return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 class StudentApplicationViewSet(viewsets.ModelViewSet):
     queryset = StudentApplication.objects.all().order_by("id")
@@ -57,7 +59,7 @@ class AppLogin(APIView):
                     return Response(encoded_jwt, status = status.HTTP_200_OK)
 
                 else:
-                    return Response("Failed login", status = status.HTTP_400_BAD_REQUEST)
+                    return Response("Login information is wong", status = status.HTTP_400_BAD_REQUEST)
 
             except django.core.exceptions.ObjectDoesNotExist:
                 try:
@@ -69,10 +71,11 @@ class AppLogin(APIView):
                         return Response(encoded_jwt, status = status.HTTP_200_OK)
 
                     else:
-                        return Response("Failed login", status = status.HTTP_400_BAD_REQUEST)
+                        return Response("Login information is wrong", status = status.HTTP_400_BAD_REQUEST)
 
                 except django.core.exceptions.ObjectDoesNotExist:
                     return Response("Login failed", status = status.HTTP_400_BAD_REQUEST)
+
         else:
             return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
@@ -81,8 +84,10 @@ class TokenRefresh(APIView):
         serializer = TokenSerializer(data = request.data)
 
         if serializer.is_valid():
-            if(jwtmanager.verifyToken(serializer.data["token"])):
-                encoded_jwt = jwtmanager.refreshToken(serializer.data["token"])
+            token = jwtmanager.refreshToken(serializer.data["token"])
+
+            if(token != False):
+                encoded_jwt = token
 
                 return Response(encoded_jwt, status = status.HTTP_200_OK)
            
