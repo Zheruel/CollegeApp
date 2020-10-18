@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UserRegister } from "../interfaces/user-register"
 import { WebService } from "../services/webservice.service"
+import { Token } from "../interfaces/token"
+import {Router} from "@angular/router"
 
 @Component({
   selector: 'app-register',
@@ -10,11 +12,15 @@ import { WebService } from "../services/webservice.service"
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private webService: WebService) { }
+  constructor(private webService: WebService, private router: Router) { }
 
   ngOnInit(): void {
-    if(sessionStorage.getItem("token") != null){
-      console.log("Token is here");
+    var token: Token = {
+      token: sessionStorage.getItem("token"),
+    }
+
+    if(token.token != null){
+      this.router.navigate([""]);
     }
   }
 

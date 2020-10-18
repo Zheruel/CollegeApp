@@ -21,17 +21,18 @@ export class LoginComponent implements OnInit {
     if(token.token != null){
       this.authService.verifyToken(token).subscribe({
         next: data => {
-          console.log(data);
+          this.router.navigate([""]);
         },
         error: error => {
           this.authService.refreshToken(token).subscribe({
             next: data => {
-              console.log(data);
-              
               sessionStorage.setItem("token", data);
+
+              this.router.navigate([""]);
             },
             error: error => {
               console.log(error);
+              sessionStorage.removeItem("token");
             }
           });
         }

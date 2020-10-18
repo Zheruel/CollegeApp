@@ -5,16 +5,15 @@
 				<h3>Sign In</h3>
 			</div>
 			<div class="card-body">
-				<form>
+				<form ngNativeValidate #form>
 					<div class="input-group form-group">
-						<input type="text" class="form-control" placeholder="email" [formControl]="email">
-						
+						<input type="text" class="form-control" placeholder="email" required [formControl]="email">
 					</div>
 					<div class="input-group form-group">
-						<input type="password" class="form-control" placeholder="password" [formControl]="password">
+						<input type="password" class="form-control" placeholder="password" required [formControl]="password" >
 					</div>
 					<div class="form-group">
-						<input type="submit" value="Login" class="btn float-right login_btn" (click)="login()">
+						<input type="submit" value="Login" class="btn float-right login_btn" (click)="form.checkValidity()? login() : null">
 					</div>
 				</form>
 			</div>
