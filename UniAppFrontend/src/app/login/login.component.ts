@@ -12,10 +12,13 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    if(sessionStorage.getItem("token") != null){
+      console.log("Token is here");
+    }
   }
   
-  email = new FormControl("")
-  password = new FormControl("")
+  email = new FormControl("");
+  password = new FormControl("");
 
   login(){
     var loginInfo: UserLogin = {
