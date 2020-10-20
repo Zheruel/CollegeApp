@@ -5,9 +5,10 @@ import { MainPortalComponent } from './main-portal/main-portal.component';
 import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
-  {path: "login", component: LoginComponent},
-  {path: "register", component: RegisterComponent},
-  {path: "", component: MainPortalComponent}
+  {
+    path: "",
+    loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule)
+  }
 ];
 
 @NgModule({
