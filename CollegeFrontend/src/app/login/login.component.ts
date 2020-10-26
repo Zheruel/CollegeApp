@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
+import { Logininfo } from "../interfaces/logininfo"
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,6 +19,11 @@ export class LoginComponent implements OnInit {
   password = new FormControl('');
 
   login(){
-    console.log("test");
+    var loginInfo: Logininfo = {
+      email: this.email.value,
+      password: this.password.value
+    }
+
+    
   }
 }
