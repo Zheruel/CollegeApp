@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginlayoutComponent } from "./layouts/loginlayout/loginlayout.component"
 import { LoginComponent } from "./login/login.component"
 import { RegisterComponent } from "./register/register.component"
+import { DashboardlayoutComponent } from "./layouts/dashboardlayout/dashboardlayout.component"
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
       }
     ],
   },
+  {path: "dashboard", component: DashboardlayoutComponent}
 ];
 
 @NgModule({
