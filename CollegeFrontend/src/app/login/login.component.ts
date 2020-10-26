@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import {Router} from "@angular/router"
 
 import { Logininfo } from "../interfaces/logininfo"
+import { AuthService } from "../services/auth.service"
 
 @Component({
   selector: 'app-login',
@@ -9,11 +11,11 @@ import { Logininfo } from "../interfaces/logininfo"
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  public loginFailed = false;
 
-  constructor() { }
+  constructor(private auth: AuthService, private router: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   email = new FormControl('');
   password = new FormControl('');
@@ -24,6 +26,16 @@ export class LoginComponent implements OnInit {
       password: this.password.value
     }
 
-    
+    this.auth.login(loginInfo).subscribe({
+      next: data => {
+        sessionStorage.setItem("token", String(data));
+        
+        this.router.navigate(["/dashboard"])
+      },
+
+      error: error => {
+        this.loginFailed = true;
+      }
+    });
   }
 }

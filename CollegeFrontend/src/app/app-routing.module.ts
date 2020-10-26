@@ -3,15 +3,20 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LoginlayoutComponent } from "./layouts/loginlayout/loginlayout.component"
 import { LoginComponent } from "./login/login.component"
+import { RegisterComponent } from "./register/register.component"
 
 const routes: Routes = [
   {
     path: "",
-    component: LoginlayoutComponent, // this is the component with the <router-outlet> in the template
+    component: LoginlayoutComponent,
     children: [
       {
-        path: "login", // child route path
-        component: LoginComponent, // child route component that the router renders
+        path: "login",
+        component: LoginComponent,
+      },
+      {
+        path: "register",
+        component: RegisterComponent,
       }
     ],
   },

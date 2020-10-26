@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { LoginlayoutComponent } from './layouts/loginlayout/loginlayout.component';
 import { DashboardlayoutComponent } from './layouts/dashboardlayout/dashboardlayout.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginlayoutComponent,
     DashboardlayoutComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
