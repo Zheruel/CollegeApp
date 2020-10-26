@@ -1,16 +1,9 @@
 from django.db import models
 
 
-class College(models.Model):
-    name = models.CharField(max_length = 100)
-
-    def __str__(self):
-        return self.name
-
 class Major(models.Model):
     name = models.CharField(max_length = 100)
     quota = models.IntegerField()
-    college = models.ForeignKey(College, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -32,6 +25,7 @@ class Student(models.Model):
         return self.firstName + self.lastName
 
 class StudentApplication(models.Model):
+    status = models.BooleanField(default = False)
     birthDate = models.DateField()
     birthPlace = models.CharField(max_length = 100)
     highSchoolName = models.CharField(max_length = 100)

@@ -4,7 +4,6 @@ from . import views
 
 
 router = routers.DefaultRouter()
-router.register(r"colleges", views.CollegeViewSet)
 router.register(r"majors", views.MajorViewSet)
 router.register(r"subjects", views.SubjectViewSet)
 router.register(r"students", views.StudentViewSet)

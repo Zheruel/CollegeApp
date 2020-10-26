@@ -9,13 +9,14 @@ from . import jwtmanager
 import django.core.exceptions
 from django.contrib.auth.hashers import make_password, check_password
 
-class CollegeViewSet(viewsets.ModelViewSet):
-    queryset = College.objects.all().order_by("name")
-    serializer_class = CollegeSerializer
 
 class MajorViewSet(viewsets.ModelViewSet):
     queryset = Major.objects.all().order_by("name")
     serializer_class = MajorSerializer
+
+    def list(self, request):
+        serializer = MajorSerializer(data = request.data)
+        print(request.META.get('HTTP_AUTH'))
 
 class SubjectViewSet(viewsets.ModelViewSet):
     queryset = Subject.objects.all().order_by("name")
