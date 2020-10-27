@@ -14,6 +14,9 @@ export class RegisterComponent implements OnInit {
   constructor(private webService: WebService, private router: Router) { }
 
   ngOnInit(): void {
+    if(sessionStorage.getItem("token")){
+      this.router.navigate(["/dashboard"])
+    }
   }
 
   public registerFailed = false;

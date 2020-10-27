@@ -41,6 +41,8 @@ export class AuthService {
 
             error: error => {
               sessionStorage.removeItem("token");
+              
+              this.router.navigate(["/login"]);
             }
           });
         }
@@ -49,7 +51,7 @@ export class AuthService {
 
     else{
       if(this.router.url != "/login" && this.router.url != "/register"){
-        this.router.navigate(["/login"])
+        this.router.navigate(["/login"]);
       }
     }
   }
