@@ -15,11 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private auth: AuthService, private router: Router) { }
 
-  ngOnInit(): void {
-    if(sessionStorage.getItem("token")){
-      this.router.navigate(["/dashboard"])
-    }
-  }
+  ngOnInit(): void {}
 
   email = new FormControl('');
   password = new FormControl('');

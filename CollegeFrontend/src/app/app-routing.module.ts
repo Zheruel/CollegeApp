@@ -21,7 +21,6 @@ const routes: Routes = [
       }
     ],
   },
-  {path: "", component: DashboardlayoutComponent},
   {path: "dashboard", component: DashboardlayoutComponent}
 ];
 

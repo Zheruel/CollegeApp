@@ -13,11 +13,7 @@ import { Registerinfo } from "../interfaces/registerinfo"
 export class RegisterComponent implements OnInit {
   constructor(private webService: WebService, private router: Router) { }
 
-  ngOnInit(): void {
-    if(sessionStorage.getItem("token")){
-      this.router.navigate(["/dashboard"])
-    }
-  }
+  ngOnInit(): void {}
 
   public registerFailed = false;
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router"
 
 import { AuthService } from "../../services/auth.service"
 
@@ -9,10 +10,12 @@ import { AuthService } from "../../services/auth.service"
 })
 export class LoginlayoutComponent implements OnInit {
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.auth.confirmSession();
+    if(sessionStorage.getItem("token")){
+      this.router.navigate(["/dashboard"])
+    }
   }
 
 }
