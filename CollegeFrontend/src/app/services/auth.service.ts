@@ -4,6 +4,7 @@ import {Router} from "@angular/router"
 
 import { Logininfo } from "../interfaces/logininfo"
 import { Token } from "../interfaces/token"
+import { Validateduser } from "../interfaces/validateduser"
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class AuthService {
 
   refreshToken(token: Token){
     return this.http.post("http://localhost:5000/token/refresh", token);
+  }
+
+  userValidate(token: Token){
+    return this.http.post<Validateduser>("http://localhost:5000/user/validate", token);
   }
 
   confirmSession(){

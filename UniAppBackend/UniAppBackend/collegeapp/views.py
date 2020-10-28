@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from . import jwtmanager
 import django.core.exceptions
 from django.contrib.auth.hashers import make_password, check_password
+import jwt
 
 
 class MajorViewSet(viewsets.ModelViewSet):
@@ -105,6 +106,24 @@ class TokenValidate(APIView):
         if serializer.is_valid():
             if(jwtmanager.verifyToken(serializer.data["token"])):
                 return Response("Token is valid", status = status.HTTP_200_OK)
+
+            else:
+                return Response("Token is invalid", status = status.HTTP_400_BAD_REQUEST)
+
+class UserValidate(APIView):
+    def post(self, request, format=None):
+        serializer = TokenSerializer(data = request.data)
+
+        if serializer.is_valid():
+            if(jwtmanager.verifyToken(serializer.data["token"])):
+                decoded_jwt = jwt.decode(serializer.data["token"], "secret", algorithms=["HS256"])
+
+                user_info = {
+                    "email": decoded_jwt["email"],
+                    "role": decoded_jwt["role"]
+                    }
+
+                return Response(user_info, status = status.HTTP_200_OK)
 
             else:
                 return Response("Token is invalid", status = status.HTTP_400_BAD_REQUEST)

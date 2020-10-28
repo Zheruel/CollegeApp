@@ -4,7 +4,6 @@ from datetime import datetime, timedelta
 def getToken(data, role):
     encoded_jwt = jwt.encode({
                 "email": data["email"],
-                "password": data["password"],
                 "role": role,
                 "expires": (datetime.now() + timedelta(hours=1)).strftime("%m/%d/%Y, %H:%M:%S"),
                 }, "secret", algorithm="HS256")

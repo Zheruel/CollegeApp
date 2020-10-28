@@ -10,6 +10,7 @@ import { LoginlayoutComponent } from './layouts/loginlayout/loginlayout.componen
 import { DashboardlayoutComponent } from './layouts/dashboardlayout/dashboardlayout.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { SidebarComponent } from './dashboardcomponents/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { RegisterComponent } from './register/register.component';
     LoginlayoutComponent,
     DashboardlayoutComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

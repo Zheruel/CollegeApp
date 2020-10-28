@@ -14,7 +14,11 @@ export class LoginlayoutComponent implements OnInit {
 
   ngOnInit(): void {
     if(sessionStorage.getItem("token")){
-      this.router.navigate(["/dashboard"])
+      this.router.navigate(["/dashboard"]);
+    }
+
+    if(this.router.url == "/"){
+      this.router.navigate(["/login"]);
     }
   }
 
