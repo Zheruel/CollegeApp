@@ -11,7 +11,7 @@ from django.contrib.auth.hashers import make_password, check_password
 import jwt
 
 
-class MajorViewSet(viewsets.ModelViewSet):
+class MajorViewSet(viewsets.ViewSet):
     queryset = Major.objects.all().order_by("name")
     serializer_class = MajorSerializer
 
