@@ -1,9 +1,16 @@
 <div class="bg-light border-right" id="sidebar-wrapper">
     <div class="sidebar-heading text-center">{{userInfo?.email}}</div>
     <p class="text-center">role: {{userInfo?.role}}</p>
-    <div class="list-group list-group-flush">
-      <a href="/dashboard/test" class="list-group-item list-group-item-action bg-light">Colleges</a>
-      <a href="#" class="list-group-item list-group-item-action bg-light">Filled Applications</a>
+    <div class="list-group list-group-flush" *ngIf="userInfo && userInfo.role == 'student'">
+      <a class="list-group-item list-group-item-action bg-light" (click)="getMajors()">Majors</a>
+      <a href="#" class="list-group-item list-group-item-action bg-light">My Applications</a>
+      <a class="list-group-item list-group-item-action bg-light" (click)="logout()">Log out</a>
+    </div>
+    <div class="list-group list-group-flush" *ngIf="userInfo && userInfo.role == 'administrator'">
+      <a href="/dashboard/test" class="list-group-item list-group-item-action bg-light">College management</a>
+      <a href="#" class="list-group-item list-group-item-action bg-light">Application management</a>
+      <a href="#" class="list-group-item list-group-item-action bg-light">User management</a>
+      <a href="#" class="list-group-item list-group-item-action bg-light">Administrator management</a>
       <a class="list-group-item list-group-item-action bg-light" (click)="logout()">Log out</a>
     </div>
 </div>

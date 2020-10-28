@@ -16,8 +16,17 @@ class MajorViewSet(viewsets.ModelViewSet):
     serializer_class = MajorSerializer
 
     def list(self, request):
-        serializer = MajorSerializer(data = request.data)
-        print(request.META.get('HTTP_AUTH'))
+        token = request.META.get('HTTP_AUTHORIZATION')
+
+        if(token and jwtmanager.verifyToken(token)):
+            queryset = Major.objects.all()
+            serializer = MajorSerializer(queryset, many=True)
+            return Response(serializer.data)
+
+        else:
+            return Response("Not allowed", status = status.HTTP_400_BAD_REQUEST)
+
+        
 
 class SubjectViewSet(viewsets.ModelViewSet):
     queryset = Subject.objects.all().order_by("name")

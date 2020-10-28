@@ -14,5 +14,4 @@ export class DashboardlayoutComponent implements OnInit {
   ngOnInit(): void {
     this.auth.confirmSession();
   }
-
 }
