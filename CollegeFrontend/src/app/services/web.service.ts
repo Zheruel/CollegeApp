@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router} from "@angular/router"
 
 import { Registerinfo } from "../interfaces/registerinfo"
-import { Token } from "../interfaces/token"
+import { Major } from "../interfaces/major"
 
 
 @Injectable({
@@ -18,7 +18,7 @@ export class WebService {
   }
 
   getMajors(){
-    return this.http.get("http://localhost:5000/majors/", 
+    return this.http.get<Major[]>("http://localhost:5000/majors/", 
     {
       headers: new HttpHeaders().set("Authorization", sessionStorage.getItem("token")),
     });

@@ -1,1 +1,20 @@
-<p>majors works!</p>
+<table class="table table-striped" *ngIf="majorList">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Quota</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let major of majorList">
+      <th scope="row">{{ major.id }}</th>
+      <td>{{ major.name}}</td>
+      <td>{{ major.quota | number }}</td>
+      <td><a class="btn btn-primary" href="" role="button">List subjects</a></td>
+      <td><a class="btn btn-primary" href="" role="button">Apply</a></td>
+    </tr>
+    </tbody>
+</table>

@@ -9,16 +9,6 @@ import { MajorsComponent } from "./dashboardcomponents/majors/majors.component"
 
 const routes: Routes = [
   {
-    path: "dashboard",
-    component: DashboardlayoutComponent,
-    children: [
-      {
-        path: "majors",
-        component: MajorsComponent,
-      }
-    ],
-  },
-  {
     path: "",
     component: LoginlayoutComponent,
     children: [
@@ -29,6 +19,16 @@ const routes: Routes = [
       {
         path: "register",
         component: RegisterComponent,
+      }
+    ],
+  },
+  {
+    path: "dashboard",
+    component: DashboardlayoutComponent,
+    children: [
+      {
+        path: "majors",
+        component: MajorsComponent,
       }
     ],
   }
