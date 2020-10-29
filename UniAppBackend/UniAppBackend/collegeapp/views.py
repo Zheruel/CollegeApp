@@ -11,7 +11,7 @@ from django.contrib.auth.hashers import make_password, check_password
 import jwt
 
 
-class MajorViewSet(viewsets.ViewSet):
+class MajorViewSet(viewsets.ModelViewSet):
     queryset = Major.objects.all().order_by("name")
     serializer_class = MajorSerializer
 
@@ -21,6 +21,7 @@ class MajorViewSet(viewsets.ViewSet):
         if(token and jwtmanager.verifyToken(token)):
             queryset = Major.objects.all()
             serializer = MajorSerializer(queryset, many=True)
+
             return Response(serializer.data)
 
         else:

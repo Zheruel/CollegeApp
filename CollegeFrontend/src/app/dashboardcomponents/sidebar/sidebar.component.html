@@ -2,7 +2,7 @@
     <div class="sidebar-heading text-center">{{userInfo?.email}}</div>
     <p class="text-center">role: {{userInfo?.role}}</p>
     <div class="list-group list-group-flush" *ngIf="userInfo && userInfo.role == 'student'">
-      <a class="list-group-item list-group-item-action bg-light" (click)="getMajors()">Majors</a>
+      <a href="dashboard/majors"class="list-group-item list-group-item-action bg-light">Majors</a>
       <a href="#" class="list-group-item list-group-item-action bg-light">My Applications</a>
       <a class="list-group-item list-group-item-action bg-light" (click)="logout()">Log out</a>
     </div>

@@ -11,6 +11,7 @@ import { DashboardlayoutComponent } from './layouts/dashboardlayout/dashboardlay
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SidebarComponent } from './dashboardcomponents/sidebar/sidebar.component';
+import { MajorsComponent } from './dashboardcomponents/majors/majors.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SidebarComponent } from './dashboardcomponents/sidebar/sidebar.componen
     DashboardlayoutComponent,
     LoginComponent,
     RegisterComponent,
-    SidebarComponent
+    SidebarComponent,
+    MajorsComponent
   ],
   imports: [
     BrowserModule,

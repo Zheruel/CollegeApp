@@ -1,4 +1,5 @@
-<div class="d-flex" id="wrapper">
+<body>
+  <div class="d-flex" id="wrapper">
     
     <!-- Sidebar -->
     <app-sidebar></app-sidebar>
@@ -6,8 +7,10 @@
     <!-- Routed content -->
     <div id="page-content-wrapper">
       <div class="container-fluid">
-        <router-outlet></router-outlet>
       </div>
     </div>
 
-  </div>
+    <router-outlet></router-outlet>
+
+</div>
+</body>

@@ -17,9 +17,10 @@ export class LoginlayoutComponent implements OnInit {
       this.router.navigate(["/dashboard"]);
     }
 
-    if(this.router.url == "/"){
-      this.router.navigate(["/login"]);
-    }
+    else{
+      if(this.router.url == "/"){
+        this.router.navigate(["/login"]);
+      }
+    } 
   }
-
 }
