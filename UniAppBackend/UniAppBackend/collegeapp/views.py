@@ -9,25 +9,8 @@ from . import jwtmanager
 import django.core.exceptions
 from django.contrib.auth.hashers import make_password, check_password
 import jwt
+from django.db.models import Count
 
-
-class MajorViewSet(viewsets.ModelViewSet):
-    queryset = Major.objects.all().order_by("name")
-    serializer_class = MajorSerializer
-
-    def list(self, request):
-        token = request.META.get('HTTP_AUTHORIZATION')
-
-        if(token and jwtmanager.verifyToken(token)):
-            queryset = Major.objects.all()
-            serializer = MajorSerializer(queryset, many=True)
-
-            return Response(serializer.data)
-
-        else:
-            return Response("Not allowed", status = status.HTTP_400_BAD_REQUEST)
-
-        
 
 class SubjectViewSet(viewsets.ModelViewSet):
     queryset = Subject.objects.all().order_by("name")

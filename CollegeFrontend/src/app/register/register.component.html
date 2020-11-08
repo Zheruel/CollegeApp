@@ -30,7 +30,7 @@
 					<span class="focus-input100" data-placeholder="&#xf191;"></span>
 				</div>
 
-				<p *ngIf="registerFailed == true" style="color:red;">Login failed</p>
+				<p *ngIf="registerFailed == true" style="color:red;">Register failed (email taken)</p>
 
 				<div class="container-login100-form-btn">
 					<button class="login100-form-btn" (click)="form.checkValidity()? register() : null">

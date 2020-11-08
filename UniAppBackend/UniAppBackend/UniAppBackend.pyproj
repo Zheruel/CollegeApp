@@ -34,6 +34,12 @@
   <ItemGroup>
     <Compile Include="collegeapp\admin.py" />
     <Compile Include="collegeapp\apps.py" />
+    <Compile Include="collegeapp\authmixin.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="collegeapp\controllers\major_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="collegeapp\jwtmanager.py">
       <SubType>Code</SubType>
     </Compile>
@@ -60,6 +66,7 @@
   <ItemGroup>
     <Folder Include="collegeapp\" />
     <Folder Include="collegeapp\migrations\" />
+    <Folder Include="collegeapp\controllers\" />
     <Folder Include="collegeapp\templates\" />
     <Folder Include="collegeapp\templates\collegeapp\" />
     <Folder Include="UniAppBackend\" />

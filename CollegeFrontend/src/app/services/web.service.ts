@@ -18,7 +18,7 @@ export class WebService {
   }
 
   getMajors(){
-    return this.http.get<Major[]>("http://localhost:5000/majors/", 
+    return this.http.get<Major[]>("http://localhost:5000/majors", 
     {
       headers: new HttpHeaders().set("Authorization", sessionStorage.getItem("token")),
     });
