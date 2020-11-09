@@ -17,5 +17,6 @@ urlpatterns = [
     path('token/validate', views.TokenValidate.as_view()),
     path('user/validate', views.UserValidate.as_view()),
     path('majors', major_controller.ListMajors.as_view()),
+    path('major/<int:id>/subjects', major_controller.ListSubjectsOfMajor.as_view()),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

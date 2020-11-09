@@ -3,15 +3,18 @@ from .models import *
 from django.contrib.auth.hashers import make_password
 
 
-class MajorSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Major
-        fields = ("id", "name", "quota")
+class MajorSerializer(serializers.Serializer):
+    id = serializers.IntegerField(required = True)
+    name = serializers.CharField(required = True)
+    quota = serializers.CharField(required = True)
 
-class SubjectSerializer(serializers.HyperlinkedModelSerializer):
+    def create(self, validated_data):
+        return validated_data
+
+class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subject
-        fields = ("id", "name", "major")
+        fields = ("id", "name")
 
 class StudentSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):

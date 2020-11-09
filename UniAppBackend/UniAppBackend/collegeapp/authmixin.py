@@ -1,4 +1,5 @@
 from collegeapp import jwtmanager
+from django.http import HttpResponseNotFound
 
 
 class CheckAuth:
